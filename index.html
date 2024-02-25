@@ -27,22 +27,43 @@
 
     <h1>dragNdrop</h1>
 
-    <div class="draggable" >
-        <div  id="div1" draggable="true">
+    <div class="draggable" ondrop="drop(event)" ondragover="allowDrop(event)">
+        <div  id="div1" draggable="true" ondrag="drag(event)" ondragstart="drag(event)">
             div 1
         </div>
-        <div  id="div2"draggable="true">
+        <div  id="div2"draggable="true" ondrag="drag(event)" ondragstart="drag(event)">
             div 2
         </div>
-        <div  id="div3"draggable="true">
+        <div  id="div3"draggable="true" ondrag="drag(event)" ondragstart="drag(event)">
             div 3
         </div>
-        <div  id="div4"draggable="true">
+        <div  id="div4"draggable="true" ondrag="drag(event)" ondragstart="drag(event)">
             div 4
         </div>
     </div>  
-    <div id="drop">
+    <div id="drop" ondrop="drop(event)" ondragover="allowDrop(event)" class="dropzone" dropzone>
         drop zone
     </div>
+    <script>
+
+        function allowDrop(event){
+            event.preventDefault();
+
+        }
+
+        function drag(event) {
+            event.dataTransfer.setData("text", event.target.id);
+
+        }
+
+        function drop(event) {
+            event.preventDefault();
+            var data = event.dataTransfer.getData("text");
+            event.target.appendChild(document.getElementById(data));
+        }
+
+
+    </script>
+
 </body>
 </html>`
